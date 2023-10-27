@@ -5,10 +5,10 @@ import streamlit as st
 
 sns.set(style='dark')
 
-hour_df = pd.read_csv('./dashboard/hour_df.csv')
+hour_df = pd.read_csv('./hour_df.csv')
 hour_df['dteday'] = pd.to_datetime(hour_df['dteday'])
 
-day_df = pd.read_csv('./dashboard/day_df.csv')
+day_df = pd.read_csv('./day_df.csv')
 day_df['dteday'] = pd.to_datetime(day_df['dteday'])
 
 def create_lastday_df(df):
@@ -28,21 +28,21 @@ def create_lastday_df(df):
 
 def get_weather_image(weather, season):
     if weather == 'mist':
-        return './dashboard/image/fog.png'
+        return './image/fog.png'
     elif weather == 'clear':
-        return './dashboard/image/sun.png'
+        return './image/sun.png'
     elif (weather == 'light rain/snow') & (season == 'winter'):
-        return './dashboard/image/snow.png'
+        return './image/snow.png'
     elif weather == 'light rain/snow':
-        return './dashboard/image/heavy-rain.png'
+        return './image/heavy-rain.png'
     else:
-        return './dashboard/image/rain.png'
+        return './image/rain.png'
 
 min_date = hour_df['dteday'].min()
 max_date = hour_df['dteday'].max()
 
 with st.sidebar:
-    st.image('./dashboard/image/bicycle.png')
+    st.image('./image/bicycle.png')
     select_date = st.date_input(
         label='Pilih tanggal',
         min_value=min_date,
@@ -79,13 +79,13 @@ with col2:
     st.image(get_weather_image(weather, season), width=55, caption=(f"{lastday_data['temp'].mean().round(2)}°C"))
 with col3:
     st.text('Season')
-    st.image('./dashboard/image/season.png', width=55, caption=lastday_data['season_name'].mode().values[0])
+    st.image('./image/season.png', width=55, caption=lastday_data['season_name'].mode().values[0])
 with col4:
     st.text('Windspeed*')
-    st.image('./dashboard/image/windy.png', width=55, caption=(f"{lastday_data['windspeed'].mean().round(2)} knot"))
+    st.image('./image/windy.png', width=55, caption=(f"{lastday_data['windspeed'].mean().round(2)} knot"))
 with col5:
     st.text('Humidity*')
-    st.image('./dashboard/image/humidity.png', width=55, caption=(f"{lastday_data['hum'].mean().round(2)} %"))
+    st.image('./image/humidity.png', width=55, caption=(f"{lastday_data['hum'].mean().round(2)} %"))
     st.caption('\* average')
 
 
@@ -101,7 +101,7 @@ st.pyplot(fig)
 
 col0, col1, col2, col3, col4 = st.columns([1, 1, 1, 1, 1])
 with col0:
-    st.image('./dashboard/image/user.png', width=70)
+    st.image('./image/user.png', width=70)
 with col1:
     casual_user = lastday_data['casual'].sum()
     st.metric('Casual', value=casual_user)
@@ -129,17 +129,17 @@ lastweek_data = create_lastweek_df(main_df(day_df))
 col0, col1, col2, col3, col4, col5, col6 = st.columns([1, 1, 3, 1, 3, 1, 3])
 
 with col1:
-    st.image('./dashboard/image/thermometer.png', width=50)
+    st.image('./image/thermometer.png', width=50)
 with col2:
     st.subheader(f"{lastweek_data.temp.mean().round(1)}°C")
     # st.text('Temp*')
 with col3:
-    st.image('./dashboard/image/windy.png', width=50)
+    st.image('./image/windy.png', width=50)
 with col4:
     st.subheader(f"{lastweek_data.windspeed.mean().round(1)} Knot")
     # st.text('Windspeed*')
 with col5:
-    st.image('./dashboard/image/humidity.png', width=50)
+    st.image('./image/humidity.png', width=50)
 with col6:
     st.subheader(f"{lastweek_data.hum.mean().round(1)}%")
     # st.text('Humidity*')
@@ -158,7 +158,7 @@ st.pyplot(fig)
 
 col0, col1, col2, col3, col4 = st.columns([1, 1, 1, 1, 1])
 with col0:
-    st.image('./dashboard/image/user.png', width=70)
+    st.image('./image/user.png', width=70)
 with col1:
     casual_user = lastweek_data['casual'].sum()
     st.metric('Casual', value=casual_user)
@@ -185,17 +185,17 @@ lastmonth_data = create_lastmonth_df(main_df(day_df))
 col0, col1, col2, col3, col4, col5, col6 = st.columns([1, 1, 3, 1, 3, 1, 3])
 
 with col1:
-    st.image('./dashboard/image/thermometer.png', width=50)
+    st.image('./image/thermometer.png', width=50)
 with col2:
     st.subheader(f"{lastmonth_data.temp.mean().round(1)}°C")
     # st.text('Temp*')
 with col3:
-    st.image('./dashboard/image/windy.png', width=50)
+    st.image('./image/windy.png', width=50)
 with col4:
     st.subheader(f"{lastmonth_data.windspeed.mean().round(1)} Knot")
     # st.text('Windspeed*')
 with col5:
-    st.image('./dashboard/image/humidity.png', width=50)
+    st.image('./image/humidity.png', width=50)
 with col6:
     st.subheader(f"{lastmonth_data.hum.mean().round(1)}%")
     # st.text('Humidity*')
@@ -214,7 +214,7 @@ st.pyplot(fig)
 
 col0, col1, col2, col3, col4 = st.columns([1, 1, 1, 1, 1])
 with col0:
-    st.image('./dashboard/image/user.png', width=70)
+    st.image('./image/user.png', width=70)
 with col1:
     casual_user = lastmonth_data['casual'].sum()
     st.metric('Casual', value=casual_user)
